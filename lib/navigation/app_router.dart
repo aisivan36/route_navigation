@@ -62,7 +62,11 @@ class AppRouter extends RouterDelegate
       pages: [
         /// Check if the app is initialized. If it's not we show the SplasScreen
         if (!appStateManager.isInitialized) SplashScreen.page(),
-// TODO: Add LoginScreen
+
+        /// If the app initialized and the user hans't logged in,
+        /// it should show the login page
+        if (appStateManager.isInitialized && !appStateManager.isLoggedIn)
+          LoginScreen.page(),
 // TODO: Add OnboardingScreen
 // TODO: Add Home
 // TODO: Create new item
