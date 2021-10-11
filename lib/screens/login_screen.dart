@@ -29,24 +29,29 @@ class LoginScreen extends StatelessWidget {
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Center(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            mainAxisAlignment: MainAxisAlignment.center,
+          /// Wrap the [Column] into [ListView] to fix scree overlay
+          child: ListView(
             children: [
-              const SizedBox(
-                height: 200,
-                child: Image(
-                  image: AssetImage(
-                    'assets/fooderlich_assets/rw_logo.png',
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  const SizedBox(
+                    height: 200,
+                    child: Image(
+                      image: AssetImage(
+                        'assets/fooderlich_assets/rw_logo.png',
+                      ),
+                    ),
                   ),
-                ),
+                  const SizedBox(height: 16),
+                  buildTextfield(username ?? '🍔 username'),
+                  const SizedBox(height: 16),
+                  buildTextfield('🎹 password'),
+                  const SizedBox(height: 16),
+                  buildButton(context),
+                ],
               ),
-              const SizedBox(height: 16),
-              buildTextfield(username ?? '🍔 username'),
-              const SizedBox(height: 16),
-              buildTextfield('🎹 password'),
-              const SizedBox(height: 16),
-              buildButton(context),
             ],
           ),
         ),
@@ -67,7 +72,10 @@ class LoginScreen extends StatelessWidget {
           style: TextStyle(color: Colors.white),
         ),
         onPressed: () async {
-          // TODO: Login -> Navigate to home
+          /// The uses [AppStateManager] to call a  function that updates
+          /// the user's login status
+          Provider.of<AppStateManager>(context, listen: false)
+              .login('mockUsername', 'mockPassword');
         },
       ),
     );
