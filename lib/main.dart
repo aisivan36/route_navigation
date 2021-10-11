@@ -3,7 +3,6 @@ import 'package:provider/provider.dart';
 
 import 'fooderlich_theme.dart';
 import 'models/models.dart';
-import 'screens/splash_screen.dart';
 import 'navigation/app_router.dart';
 
 void main() {
