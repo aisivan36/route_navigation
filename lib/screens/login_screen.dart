@@ -1,7 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import '../models/models.dart';
 
 class LoginScreen extends StatelessWidget {
-  // TODO: LoginScreen MaterialPage Helper
+  /// Static method that creates a [MaterialPage]
+  /// sets a unique key and creats [LoginScreen]
+  static MaterialPage page() {
+    return MaterialPage(
+        name: FooderlichPages.loginPath,
+        key: ValueKey(FooderlichPages.loginPath),
+        child: const LoginScreen());
+  }
 
   final String? username;
 
