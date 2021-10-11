@@ -25,6 +25,7 @@ class _FooderlichState extends State<Fooderlich> {
   final _appStateManager = AppStateManager();
   late AppRouter _appRouter;
 
+  /// Initialized the [AppRouter] before we use it
   @override
   void initState() {
     _appRouter = AppRouter(
@@ -59,8 +60,7 @@ class _FooderlichState extends State<Fooderlich> {
           return MaterialApp(
             theme: theme,
             title: 'Fooderlich',
-            // TODO: Replace with Router widget
-            home: const SplashScreen(),
+            home: Router(routerDelegate: _appRouter),
           );
         },
       ),
