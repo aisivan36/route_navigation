@@ -60,7 +60,8 @@ class AppRouter extends RouterDelegate
 
       /// Navigation stack
       pages: [
-        // TODO: Add SplashScreen
+        /// Check if the app is initialized. If it's not we show the SplasScreen
+        if (!appStateManager.isInitialized) SplashScreen.page(),
 // TODO: Add LoginScreen
 // TODO: Add OnboardingScreen
 // TODO: Add Home
