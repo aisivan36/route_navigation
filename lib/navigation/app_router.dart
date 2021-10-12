@@ -90,7 +90,25 @@ class AppRouter extends RouterDelegate
               /// no update
             },
           ),
-// TODO: Select GroceryItemScreen
+
+        /// [Edited Screen] Checks to see if a grocery item is selected
+        if (groceryManager.selectedIndex != -1)
+          //If so, then creates the Grocery Item screen page
+          GroceryItemScreen.page(
+            item: groceryManager.selectedGroceryItem,
+            index: groceryManager.selectedIndex,
+
+            /// [onCreate] only gets called when the user adds a new item
+            onCreate: (_) {
+              // no create
+            },
+
+            /// When the user changes and saves an item,
+            ///  it updates the item at the current index
+            onUpdate: (item, index) {
+              groceryManager.updateItem(item, index);
+            },
+          )
 // TODO: Add Profile Screen
 // TODO: Add WebView Screen
       ],
@@ -104,10 +122,17 @@ class AppRouter extends RouterDelegate
     if (!route.didPop(result)) {
       return false;
     }
+
+    /// Closes onboarding Guide when the user presses skip button
     if (route.settings.name == FooderlichPages.onboardingPath) {
       appStateManager.logout();
     }
-// TODO: Handle state when user closes grocery item screen
+
+    ///to ensure that the appropriate state is reset
+    /// when the user taps the back button from the grocery item screen
+    if (route.settings.name == FooderlichPages.groceryItemDetails) {
+      groceryManager.groceryItemTapped(-1);
+    }
 // TODO: Handle state when user closes profile screen
 // TODO: Handle state when user closes WebView scree
     return true;
