@@ -59,7 +59,14 @@ class _FooderlichState extends State<Fooderlich> {
           return MaterialApp(
             theme: theme,
             title: 'Fooderlich',
-            home: Router(routerDelegate: _appRouter),
+            home: Router(
+              routerDelegate: _appRouter,
+
+              /// [BackButtonDispatcher] which listens to the paltform pop route
+              /// notifications. When the user taps the Android system [Back]
+              /// button, it triggres the router delegate's [onPopPage] callback
+              backButtonDispatcher: RootBackButtonDispatcher(),
+            ),
           );
         },
       ),
