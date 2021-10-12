@@ -115,7 +115,10 @@ class AppRouter extends RouterDelegate
         ///selected their profile, if so then it shows the [Profile Screen]
         if (profileManager.didSelectUser)
           ProfileScreen.page(profileManager.getUser),
-// TODO: Add WebView Screen
+
+        /// This checks if the user tapped the option to go to the
+        /// websites, if so then it presents the [WebView] scree
+        if (profileManager.didTapOnRaywenderlich) WebViewScreen.page(),
       ],
     );
   }
@@ -145,7 +148,12 @@ class AppRouter extends RouterDelegate
     if (route.settings.name == FooderlichPages.profilePath) {
       profileManager.tapOnProfile(false);
     }
-// TODO: Handle state when user closes WebView scree
+
+    /// Check if the name of the route setting is [raywenderlich],
+    /// then it calls the appropriate method on [profileManager]
+    if (route.settings.name == FooderlichPages.raywenderlich) {
+      profileManager.tapOnRaywenderlich(false);
+    }
     return true;
   }
 
