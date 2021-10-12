@@ -76,7 +76,20 @@ class AppRouter extends RouterDelegate
         ///only when the user completes [Onboarding]
         if (appStateManager.isOnboardingComplete)
           Home.page(appStateManager.getSelectedTab),
-// TODO: Create new item
+
+        ///Chek if the user is creating a new grocery item
+        if (groceryManager.isCreatingNewItem)
+          //If so, shows the [GroceryItemScreen]
+          GroceryItemScreen.page(
+            /// When the user saves the item, it updates the grocery list
+            onCreate: (item) {
+              groceryManager.addItem(item);
+            },
+            //onUpdate only gets called when the user updates an existing item
+            onUpdate: (item, index) {
+              /// no update
+            },
+          ),
 // TODO: Select GroceryItemScreen
 // TODO: Add Profile Screen
 // TODO: Add WebView Screen
