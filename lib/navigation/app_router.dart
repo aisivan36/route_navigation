@@ -67,8 +67,15 @@ class AppRouter extends RouterDelegate
         /// it should show the login page
         if (appStateManager.isInitialized && !appStateManager.isLoggedIn)
           LoginScreen.page(),
-// TODO: Add OnboardingScreen
-// TODO: Add Home
+
+        ///If the user is loggedin but hasn't completed the Onboarding Guide yet
+        if (appStateManager.isLoggedIn && !appStateManager.isOnboardingComplete)
+          OnboardingScreen.page(),
+
+        ///it tells the app to show the home page
+        ///only when the user completes [Onboarding]
+        if (appStateManager.isOnboardingComplete)
+          Home.page(appStateManager.getSelectedTab),
 // TODO: Create new item
 // TODO: Select GroceryItemScreen
 // TODO: Add Profile Screen
@@ -84,7 +91,9 @@ class AppRouter extends RouterDelegate
     if (!route.didPop(result)) {
       return false;
     }
-    // TODO: Handle Onboarding and splash
+    if (route.settings.name == FooderlichPages.onboardingPath) {
+      appStateManager.logout();
+    }
 // TODO: Handle state when user closes grocery item screen
 // TODO: Handle state when user closes profile screen
 // TODO: Handle state when user closes WebView scree
