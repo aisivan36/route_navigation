@@ -71,7 +71,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
         ListTile(
           title: const Text('Log out'),
           onTap: () {
-            // TODO: Logout user
+            /// Sets the user profile tap state to [false]
+            Provider.of<ProfileManager>(context, listen: false)
+                .tapOnProfile(false);
+
+            /// Calls [logout()], which resets the entire app state
+            Provider.of<AppStateManager>(context, listen: false).logout();
           },
         )
       ],
