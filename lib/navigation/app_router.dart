@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fooderlich/models/fooderlich_pages.dart';
 
 import '../models/models.dart';
 import '../screens/screens.dart';
@@ -108,8 +109,12 @@ class AppRouter extends RouterDelegate
             onUpdate: (item, index) {
               groceryManager.updateItem(item, index);
             },
-          )
-// TODO: Add Profile Screen
+          ),
+
+        ///This checks the profile manager to see if the user
+        ///selected their profile, if so then it shows the [Profile Screen]
+        if (profileManager.didSelectUser)
+          ProfileScreen.page(profileManager.getUser),
 // TODO: Add WebView Screen
       ],
     );
@@ -133,7 +138,13 @@ class AppRouter extends RouterDelegate
     if (route.settings.name == FooderlichPages.groceryItemDetails) {
       groceryManager.groceryItemTapped(-1);
     }
-// TODO: Handle state when user closes profile screen
+
+    /// This checks to see if the route we are popping is indeed the profilePath
+    /// Then tells the [profileManager] that the [Profile] screen
+    /// is not visible anymore. Button [X] close function
+    if (route.settings.name == FooderlichPages.profilePath) {
+      profileManager.tapOnProfile(false);
+    }
 // TODO: Handle state when user closes WebView scree
     return true;
   }
