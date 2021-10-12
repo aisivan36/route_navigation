@@ -5,7 +5,13 @@ import '../components/circle_image.dart';
 import '../models/models.dart';
 
 class ProfileScreen extends StatefulWidget {
-  // TODO: ProfileScreen MaterialPage Helper
+  /// Helper for the [Profile Screen], it requires a user object
+  static MaterialPage page(User user) {
+    return MaterialPage(
+        name: FooderlichPages.profilePath,
+        key: ValueKey(FooderlichPages.profilePath),
+        child: ProfileScreen(user: user));
+  }
 
   final User user;
   const ProfileScreen({
@@ -25,7 +31,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
         leading: IconButton(
           icon: const Icon(Icons.close),
           onPressed: () {
-            // TODO: Close Profile Screen
+            /// When the user taps the [X] close button.
+            /// It updates the profile state
+            /// so the navigator removes the Profile screen
+            Provider.of<ProfileManager>(context, listen: false)
+                .tapOnProfile(false);
           },
         ),
       ),
