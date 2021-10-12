@@ -59,7 +59,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
       children: [
         buildDarkModeRow(),
         ListTile(
-          title: const Text('View raywenderlich.com'),
+          title: const Text('View My GitHub'),
           onTap: () {
             /// When the user taps the correspinding button.
             /// It triggres a rebuild on our router widget
