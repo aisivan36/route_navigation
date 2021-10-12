@@ -88,7 +88,10 @@ class _HomeState extends State<Home> {
           ),
         ),
         onTap: () {
-          // TODO: home -> profile
+          ///This triggers [tapOnProfile()]
+          /// whenever the user taps the Profile button
+          Provider.of<ProfileManager>(context, listen: false)
+              .tapOnProfile(true);
         },
       ),
     );
